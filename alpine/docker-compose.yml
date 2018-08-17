@@ -1,0 +1,16 @@
+version: '3'
+services:
+  box:
+    build:
+      context: .
+      dockerfile: dockerfile
+
+    container_name: build_box
+    image: build_whl_alpine
+    environment:
+    - "SRC_LINK=https://github.com/python-greenlet/greenlet/archive/0.4.14.tar.gz"
+    - "DEF_PYTHON_VERSION=3.5"
+    volumes:
+    - "./dist:/dist"
+    - "./build.sh:/whl/build.sh"
+    command: ["/bin/sh", "/whl/build.sh"]

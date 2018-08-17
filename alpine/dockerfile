@@ -1,0 +1,8 @@
+FROM python:3.6-alpine3.8
+
+WORKDIR /whl
+
+RUN apk add --no-cache dumb-init unzip curl build-base \
+    && mkdir /dist
+
+ENTRYPOINT ["dumb-init", "--"]

@@ -1,16 +1,24 @@
-version: '3'
+version: '3.5'
+
 services:
-  box:
+
+  build_whl:
     build:
       context: .
+      args:
+      # TAG: choose python version, from https://hub.docker.com/_/python
+      - TAG=3.7-alpine
+      - MIRROR=mirrors.aliyun.com
+      #  - MIRROR=mirrors.ustc.edu.cn
       dockerfile: dockerfile
 
+
     container_name: build_box
-    image: build_whl_alpine
+    image: build_whl:alpine
     environment:
-    - "SRC_LINK=https://github.com/python-greenlet/greenlet/archive/0.4.14.tar.gz"
-    - "DEF_PYTHON_VERSION=3.5"
+    - SRC_LINK=https://github.com/python-greenlet/greenlet/archive/0.4.14.tar.gz
+
     volumes:
     - "./dist:/dist"
-    - "./build.sh:/whl/build.sh"
-    command: ["/bin/sh", "/whl/build.sh"]
+    - "./build_dist.sh:/whl/build_dist.sh"
+    command: ["/bin/sh", "/whl/build_dist.sh"]

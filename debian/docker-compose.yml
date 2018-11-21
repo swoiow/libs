@@ -1,0 +1,23 @@
+version: '3.5'
+
+services:
+
+  build_whl:
+    build:
+      context: .
+      args:
+      # TAG: choose python version, from https://hub.docker.com/_/python
+      - TAG=3.6-slim-stretch
+      - MIRROR=mirrors.ustc.edu.cn
+      dockerfile: dockerfile
+
+
+    container_name: build_box
+    image: build_whl:debian
+    environment:
+    - SRC_LINK=https://github.com/python-greenlet/greenlet/archive/0.4.14.tar.gz
+
+    volumes:
+    - "./dist:/dist"
+    - "./build_dist.sh:/whl/build_dist.sh"
+    command: ["/bin/sh", "/whl/build_dist.sh"]

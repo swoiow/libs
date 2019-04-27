@@ -5,15 +5,19 @@
 #apt-get install -y --no-install-recommends curl
 
 echo "1. 正在下载压缩包"
-curl -sL $SRC_LINK --stderr - | tar zx
+for kv in `printenv |grep SRC`; do
+  link=${kv#*=}
+  echo "DOWNLOAD... $link"
+  curl -sL "$link" --stderr - | tar zx
+done
 
-echo "2. cd 进入第一个文件夹"
-cd $(ls -d */)
+echo "2. cd 遍历文件夹"
+for dir in `ls -d */`; do
+  cd $dir
+  echo "2.1 开始 build whl IN `pwd`"
+  pip wheel .
+  cd ..
+done
 
-echo $(pwd)
-
-echo "3. 开始 build whl"
-pip wheel .
-
-echo "4. 输出所有的 whl 文件"
-cp $(ls |grep .whl) /dist
+echo "3. 输出所有的 whl 文件"
+find . -type f | grep -i .whl | xargs -i cp {} /dist

@@ -22,6 +22,6 @@ services:
     # mount it to the container path /whl.
     volumes:
 #      - "$(local path):/whl"
-      - "./dist:/dist"
-      - "./build_dist.sh:/whl/build_dist.sh"
+      - $PWD/dist:/dist
+      - "$PWD/build_dist.sh:/whl/build_dist.sh:ro"
     command: ["/bin/sh", "/whl/build_dist.sh"]

@@ -6,18 +6,22 @@ services:
     build:
       context: .
       args:
-      # TAG: choose python version, from https://hub.docker.com/_/python
-      - TAG=3.6-slim-stretch
-      - MIRROR=mirrors.ustc.edu.cn
-      dockerfile: dockerfile
+        # TAG: choose python version, from https://hub.docker.com/_/python
+        - IMAGE=python
+        - TAG=3.6-slim-stretch
+        - MIRROR=mirrors.ustc.edu.cn
+      dockerfile: Dockerfile
 
 
     container_name: build_box
     image: build_whl:debian
     environment:
-    - SRC_LINK=https://github.com/python-greenlet/greenlet/archive/0.4.14.tar.gz
+      - SRC_LINK=https://files.pythonhosted.org/packages/07/ca/bc827c5e55918ad223d59d299fff92f3563476c3b00d0a9157d9c0217449/cryptography-2.6.1.tar.gz
 
+    # if you want to mount a local path,
+    # mount it to the container path /whl.
     volumes:
-    - "./dist:/dist"
-    - "./build_dist.sh:/whl/build_dist.sh"
+#      - "$(local path):/whl"
+      - "./dist:/dist"
+      - "./build_dist.sh:/whl/build_dist.sh"
     command: ["/bin/sh", "/whl/build_dist.sh"]

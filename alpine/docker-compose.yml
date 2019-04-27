@@ -6,19 +6,23 @@ services:
     build:
       context: .
       args:
-      # TAG: choose python version, from https://hub.docker.com/_/python
-      - TAG=3.7-alpine
-      - MIRROR=mirrors.aliyun.com
+        # TAG: choose python version, from https://hub.docker.com/_/python
+        - IMAGE=python
+        - TAG=3.7-alpine
+        - MIRROR=mirrors.aliyun.com
       #  - MIRROR=mirrors.ustc.edu.cn
-      dockerfile: dockerfile
+      dockerfile: Dockerfile
 
 
     container_name: build_box
     image: build_whl:alpine
     environment:
-    - SRC_LINK=https://github.com/python-greenlet/greenlet/archive/0.4.14.tar.gz
+      - SRC_LINK=https://github.com/python-greenlet/greenlet/archive/0.4.14.tar.gz
 
+    # if you want to mount a local path,
+    # mount it to the container path /whl.
     volumes:
-    - "./dist:/dist"
-    - "./build_dist.sh:/whl/build_dist.sh"
+      #      - "$(local path):/whl"
+      - "./dist:/dist"
+      - "./build_dist.sh:/whl/build_dist.sh"
     command: ["/bin/sh", "/whl/build_dist.sh"]

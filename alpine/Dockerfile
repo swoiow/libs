@@ -1,8 +1,6 @@
 # doc: https://docs.docker.com/engine/reference/builder/#understand-how-arg-and-from-interact
 
 ARG IMAGE=python
-
-# TAG: support alpine only
 ARG TAG=3.6-alpine
 
 FROM ${IMAGE}:${TAG}

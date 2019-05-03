@@ -1,9 +1,8 @@
 # doc: https://docs.docker.com/engine/reference/builder/#understand-how-arg-and-from-interact
 
-ARG IMAGE=python
-ARG TAG=3.6-slim-stretch
+ARG IMAGE_TAG=$IMAGE_TAG
 
-FROM ${IMAGE}:${TAG}
+FROM ${IMAGE_TAG}
 
 WORKDIR /whl
 

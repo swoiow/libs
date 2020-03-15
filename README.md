@@ -8,9 +8,16 @@
 
 + 执行命令 `docker-compose up`
 
-# Usage
+## Usage 1
 
 + editor `docker-compose.yml`
 
 + run `docker-compose up`
 
+## Usage 1
+
+`make build`
+
+# 已打包
+
+见分支[master](https://github.com/swoiow/libs/tree/master)

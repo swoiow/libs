@@ -1,5 +1,10 @@
 #!/bin/sh
 
+if [ ! -z "${PRE_COMMAND}" ]; then
+    echo "Pre. 其他依赖"
+    $PRE_COMMAND
+fi
+
 echo "1. 正在下载压缩包"
 curl -sL $SRC_LINK --stderr - | tar zx
 

@@ -14,7 +14,7 @@
 
 + run `docker-compose up`
 
-## Usage 1
+## Usage 2
 
 `make build`
 

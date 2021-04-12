@@ -8,13 +8,13 @@
 
 + 执行命令 `docker-compose up`
 
-## Usage 1
+## Step 1
 
-+ editor `docker-compose.yml`
++ edit `docker-compose.yml`
 
 + run `docker-compose up`
 
-## Usage 2
+## Step 2
 
 `make build`
 
